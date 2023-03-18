@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McMillan-Allen-Dynes Formula Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>McMillan-Allen-Dynes Formula Calculator</h1>
+    <form onsubmit="calculateTc(event)">
+        <label for="lambda">Lambda (λ):</label>
+        <input type="number" id="lambda" step="any" required>
+
+        <label for="mu">Mu (μ):</label>
+        <input type="number" id="mu" step="any" required>
+
+        <label for="omega_ln">Logarithmic Average Phonon Frequency (ω_ln):</label>
+        <input type="number" id="omega_ln" step="any" required>
+
+        <button type="submit">Calculate Tc</button>
+    </form>
+    <h3 id="result"></h3>
+
+    <script>
+        function mcmillan_allen_dynes_formula(lambda_, mu, omega_ln) {
+            const Tc_numerator = omega_ln / 1.2;
+            const Tc_exponent = -1.04 * (1 + lambda_) / (lambda_ - mu * (1 + 0.62 * lambda_));
+            return Tc_numerator * Math.exp(Tc_exponent);
+        }
+
+        function calculateTc(event) {
+            event.preventDefault();
+            const lambda = parseFloat(document.getElementById("lambda").value);
+            const mu = parseFloat(document.getElementById("mu").value);
+            const omega_ln = parseFloat(document.getElementById("omega_ln").value);
+
+            const Tc = mcmillan_allen_dynes_formula(lambda, mu, omega_ln);
+            document.getElementById("result").textContent = `Superconducting transition temperature (Tc): ${Tc.toFixed(2)} K`;
+        }
+    </script>
+</body>
+</html>
+
