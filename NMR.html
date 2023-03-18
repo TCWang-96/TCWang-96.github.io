@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMR Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>(a - b) * 500 Calculator</h1>
+    <form onsubmit="calculateResult(event)">
+        <label for="a">Value of a:</label>
+        <input type="number" id="a" step="any" required>
+
+        <label for="b">Value of b:</label>
+        <input type="number" id="b" step="any" required>
+
+        <button type="submit">Calculate Result</button>
+    </form>
+    <h3 id="result"></h3>
+
+    <script>
+        function calculate_ab_result(a, b) {
+            return (a - b) * 500;
+        }
+
+        function calculateResult(event) {
+            event.preventDefault();
+            const a = parseFloat(document.getElementById("a").value);
+            const b = parseFloat(document.getElementById("b").value);
+
+            const result = calculate_ab_result(a, b);
+            document.getElementById("result").textContent = `Result: ${result.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
+
