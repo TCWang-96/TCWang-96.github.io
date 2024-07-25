@@ -1,0 +1,101 @@
+<h1>Quantum Computation</h1>
+<h2>Linear Algebra</h2>
+<p>Linear algebra is very important in quantum computation. 
+Basically we are playing with quantum computation ideas using linear algebra packages.</p>
+<p>This includes:
+* Singular Value Decomposition (SVD)
+* QR decomposition
+* Eigendecomposition
+* Schmidt decomposition and Gram-Schmidt orthogonalization</p>
+<p>Schmidt decomposition is used in <strong>Density Matrix Embedding Theory</strong> (DMET).<br />
+I think the idea of embedding method can be traced originally to the Anderson impurity model.  </p>
+<p>Useful links:<br />
+<a href="https://zhuanlan.zhihu.com/p/86137107">如何理解施密特分解定理</a><br />
+<a href="https://www.google.com/search?client=safari&amp;rls=en&amp;q=%E6%96%BD%E5%AF%86%E7%89%B9+decomposition&amp;ie=UTF-8&amp;oe=UTF-8#ip=1">Google: 施密特 decomposition</a></p>
+<h3>Low-rank approximation</h3>
+<h3>Numpy and SciPy</h3>
+<p>In practical calculations, NumPy and SciPy are two useful tools for linear algebra. </p>
+<p>For example, we use <code>eig</code>, <code>eigh</code>, and <code>eigsh</code> in <code>numpy</code> and <code>scipy</code> to diagonalize matrix and calculate eigenvalues and eigenvectors.
+Actually, <code>eigh</code> is used to treat Hermitian or a real symmetric matrix. The output of <code>eigh</code> will be <strong>sorted</strong>, while output of <code>eig</code> will be <strong>unsorted</strong>. 
+For details, please check <a href="https://stackoverflow.com/questions/45434989/numpy-difference-between-linalg-eig-and-linalg-eigh">here</a>.</p>
+<p>I have not 100% figured it out. <a href="https://www.google.com/search?q=np+dot+matmul+*+%40&amp;client=safari&amp;sca_esv=580377342&amp;rls=en&amp;sxsrf=AM9HkKnxYYJvI17bXDwrVyJANqjl4mAd6w%3A1699419336990&amp;ei=yBRLZdr8O9TQ-QblsrWQCQ&amp;ved=0ahUKEwjagJ-vzrOCAxVUaN4KHWVZDZIQ4dUDCA8&amp;uact=5&amp;oq=np+dot+matmul+*+%40&amp;gs_lp=Egxnd3Mtd2l6LXNlcnAiEW5wIGRvdCBtYXRtdWwgKiBAMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIIEAAYigUYhgNIuAxQmgZYiwtwAXgBkAEAmAHOAaABtQSqAQUwLjMuMbgBA8gBAPgBAcICChAAGEcY1gQYsAPiAwQYACBBiAYBkAYI&amp;sclient=gws-wiz-serp">Check here</a>.
+Here is <a href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html">documentation</a> of <code>numpy.dot</code>.</p>
+<p>Let's try:</p>
+<h2>About Measurements demo</h2>
+<p>Actually I think this topic is related to the category of source estimation.
+Here computational source are basically computational time (circuit repetitions) and error mitigation.  </p>
+<h3>A brief introduction</h3>
+<p>Naively speaking, in quantum computing, one of the resources we need to estimate is the <strong>measurements time required</strong>.</p>
+<p>For VQE or VQA, we should perform expectation value estimation for each CPU-QPU loop (for optimizing the parametrized wave function)</p>
+<p>Practically this is done by circuit repetition with a large number of times, preparing copies of the given state. 
+The reason is that we need to use repetitions to eliminate statistical fluctuations and control the output to be within the target precision (variance).</p>
+<p>More specifically, this fluctuation is related to the measurement in quantum mechanics. 
+Remember that in QM, when we perform measurement of an observable, we will only have output to fall in its eigenvalues, with the possibility as the coefficients of the corresponding eigen states.</p>
+<p>I would say, this (measurement) topic originates from statistics and then quantum mechanics nature.</p>
+<p>Now the next question is how large is this number of measurements, and is it possible to find an optimal way to perform measurements on quantum circuit to reduce the number of repetitions?</p>
+<p>One of the solutions proposed is to use the strategy of <em>commuting groups</em> (instead of "separate measurements"),
+because when two Pauli strings are commutable with each other, they can be <a href="https://quantumcomputing.stackexchange.com/questions/29465/what-does-commuting-operators-can-be-measured-simultaneously-mean">measured simultaneously</a> on the circuit.</p>
+<h3>Method</h3>
+<p>They use a method based on the factorization of the Hamiltonian. I think this originates from a previous work based on low-rank factorization of the Coulomb tensor.
+After performing the basis rotation, Hamiltonian will have $L+1$ terms, for which each term can be measured simultaneously.
+We note that $L$ is low $\sim O(N)$, and furthermore we can apply the so called <a href="https://web.stanford.edu/class/cs168/l/l9.pdf">low-rank approximation</a> (truncation) to reduce $L$.
+This truncation is done by discarding small eigenvalues.</p>
+<h3>OpenFermion</h3>
+<p>OpenFermion has API for Psi4 and PySCF. <a href="https://github.com/quantumlib/OpenFermion-Psi4/blob/master/openfermionpsi4/_psi4_conversion_functions.py">Here</a> is an example for Psi4 conversion functions,
+and <a href="https://github.com/quantumlib/OpenFermion-Psi4/blob/master/openfermionpsi4/_psi4_template">here</a> is a calculation template for OpenFermion-Psi4.</p>
+<p>Here is an <a href="https://quantumcomputing.stackexchange.com/questions/23801/hartree-fock-state-in-openfermion">example</a> on calculate the Hatree-Fock energy using OpenFermion. We note that to calculate the expectation value 
+we can use <code>@</code> for matrix multiplication and <code>*</code> for element-wise multiplication (follows the convention from <code>scipy.sparse</code><a href="https://docs.scipy.org/doc/scipy/reference/sparse.html">?</a>).
+I think it depends on <code>np.matrix</code> or <code>np.ndarray</code>.
+In this <a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/linalg/sparse_tools.py#L668-L710">page</a> we can see they use <code>*</code> to calculate the expectation value and variance of an operator.</p>
+<p>OpenFermion has some useful functions as follows:</p>
+<ul>
+<li><code>chemist_ordered</code>: a <a href="https://quantumai.google/reference/python/openfermion/transforms/chemist_ordered">function</a>
+to transform a two-body fermion operator in chemist ordering[^1]. However, it seems that it cannot be used to generate the two-electron integral tensor $V_{pqrs}$
+we want, because it has already <em>absorbed</em> the 8-fold symmetry of $V$. ($W$, which is the flattened $V$, should be a <a href="https://en.wikipedia.org/wiki/Definite_matrix">definite matrix</a>?)
+Source code is <a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/transforms/opconversions/term_reordering.py#L22-L62">here</a>, with applying the function <code>normal_ordered</code></li>
+<li><code>get_ground_state</code>: calculate the ground energy and ground state by exact diagonalization. The input should be a <code>LinearOperator</code> (sparse operator).
+It corresponds to the <strong>full configuration interaction</strong> (FCI) result. Indeed, it is calling the <code>eigsh</code> function in scipy. <a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/linalg/sparse_tools.py#L600-L626">Please check more details of other functions in this source code page.</a></li>
+<li><code>get_sparse_operator</code>: a <a href="https://quantumai.google/reference/python/openfermion/linalg/get_sparse_operator">function</a> to transform
+an operator to a sparse matrix. The input can be a <code>FermionOperator</code> or a <code>PolynomialTensor</code>. The output are always a <code>QubitOperator</code>, with the Jordan-Wigner transform used.</li>
+<li><code>PolynomialTensor</code>: a <a href="https://quantumai.google/reference/python/openfermion/ops/PolynomialTensor">class</a> for tensor representations of operators. It has an intrinsic 
+<a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/ops/representations/polynomial_tensor.py#L370-L384">method</a> for basis rotation as <code>rotate_basis</code>.
+Here are some <a href="https://python.hotexamples.com/examples/openfermion.ops/PolynomialTensor/rotate_basis/python-polynomialtensor-rotate_basis-method-examples.html">examples</a> on how to use <code>PolynomialTensor.rotate_basis</code>.
+<a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/ops/representations/polynomial_tensor.py#L99-L419">Please check here for source code.</a></li>
+<li><code>InteractionOperator</code>: a <a href="https://quantumai.google/reference/python/openfermion/ops/InteractionOperator">class</a> to define fermionic operator with given <code>one_body_tensor</code> and <code>two_body_tensor</code>, which later can be used as its attributes.
+It has an intrinsic <a href="https://quantumai.google/reference/python/openfermion/ops/general_basis_change">method</a> called <code>general_basis_change</code></li>
+<li><code>compress</code>: a <a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/ops/operators/symbolic_operator.py#L651-L682">function</a> to eliminate all terms with coefficients close to zero.</li>
+<li><code>get_interaction_operator</code>: a <a href="https://github.com/quantumlib/OpenFermion/blob/v1.6.0/src/openfermion/transforms/repconversions/conversions.py#L240-L314">function</a>.</li>
+</ul>
+<p>By the way, <code>FermionOperator</code> has an <code>is_normal_ordered</code> function to check whether terms are in normal order.</p>
+<p>[^1]: This is a footnote about chemist ordering.</p>
+<h3>QURI Parts</h3>
+<p>QURI Parts is a useful package to perform quantum simulation.
+They provides a <a href="https://quri-parts.qunasys.com/tutorials">general tutorial</a> on how to use QURI Parts and its modules
+such as <strong>Pauli Word Grouping</strong> and quantum chemistry calculations. </p>
+<p>We can use QURI Parts to perform <a href="https://quri-parts.qunasys.com/tutorials/sampling_simulation">sampling simulation</a>.
+We can also use <code>CommutablePauliSetMeasurement</code>  to perform sampling estimation, with given <code>pauli_set</code>, <code>measurement_circuit</code>, and <code>pauli_reconstructor_factory</code>.
+Here are some API reference we may need:</p>
+<ul>
+<li><code>operator</code>: a <a href="https://quri-parts.qunasys.com/quri_parts/core/quri_parts.core.operator.operator">module</a> for operator, as a set of single-term operators using <a href="https://utokyo-ipp.github.io/3/3-1.html">dict</a>.</li>
+<li><code>comp_basis</code>: a <a href="https://quri-parts.qunasys.com/quri_parts/core/quri_parts.core.state.comp_basis.html">module</a> for computational basis state. Binary number is suitable (we can use 7 to represent 0b111?). Superposition is available.</li>
+<li><code>shots_allocator</code>: a <a href="https://quri-parts.qunasys.com/quri_parts/core/quri_parts.core.sampling.shots_allocator.html">module</a> determine how the number of shots distribute among groups.</li>
+<li><code>sampling</code>: a <a href="https://quri-parts.qunasys.com/quri_parts/core/quri_parts.core.estimator.sampling">package</a></li>
+<li><code>measurement</code>: a <a href="https://quri-parts.qunasys.com/quri_parts/core/quri_parts.core.measurement">package</a></li>
+</ul>
+<h3>Qulacs</h3>
+<p><a href="http://docs.qulacs.org/en/latest/intro/4.1_python_tutorial.html#">Python Tutorial</a><br />
+<a href="http://docs.qulacs.org/en/latest/guide/2.0_python_advanced.html#Quantum-States">Qulacs Python Advanced Guide</a></p>
+<h3>Qiskit</h3>
+<p>Qiskit Nature</p>
+<p>Azure: <a href="https://learn.microsoft.com/en-us/azure/quantum/overview-algebra-for-quantum-computing">Linear algebra for quantum computing</a></p>
+<h3>Links</h3>
+<p>These references might be useful:
+* <a href="https://arxiv.org/abs/2012.04001">Measurements as a roadblock to near-term practical quantum advantage in chemistry: resource analysis
+</a>
+* <a href="https://arxiv.org/pdf/1908.06942.pdf">Efficient quantum measurement of Pauli operators in the presence of finite sampling error</a>
+* <a href="https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.4.033154">Measurements as a roadblock to near-term practical quantum advantage in chemistry: Resource analysis</a></p>
+<p>By the way
+* <a href="https://sam-jaques.appspot.com/quantum_landscape">LANDSCAPE OF QUANTUM COMPUTING IN 2021</a></p>
+<p>Quantum Fourier Transform</p>
+<p>and </p>
+<p>Quantum Davidson / Lanczos</p>

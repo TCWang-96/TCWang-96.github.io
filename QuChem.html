@@ -1,0 +1,68 @@
+<h1>Quantum Chemistry Notes</h1>
+<h2>Theory</h2>
+<p>One of the key concept in computational chemistry is the molecular orbital.
+In practical numerical simulations, we usually use the Hartree Fock molecular orbital.</p>
+<p>What is a <a href="https://lcbc-epfl.github.io/iesm-public/Exercises/Ex4/HF.html">Hartree Fock procedure</a>?</p>
+<p><a href="http://vergil.chemistry.gatech.edu/notes/hf-intro/hf-intro.pdf">An Introduction to Hartree-Fock Molecular Orbital Theory</a></p>
+<p><a href="https://chemistry.stackexchange.com/questions/67763/difference-between-coupled-cluster-and-full-ci">Difference between CI and CC</a></p>
+<h3>For DFT</h3>
+<p>What is the BO energy surface?</p>
+<h2>Numerical Simulation</h2>
+<ul>
+<li>PySCF: <a href="https://pyscf.org/quickstart.html#integrals-density-fitting">Quickstart</a></li>
+<li>Psi4: <a href="https://psicode.org/psi4manual/master/index_tutorials.html">Tutorial</a></li>
+<li>BAGEL: <a href="https://nubakery.org/user-manual.html">User Manual</a></li>
+<li>GQCP: <a href="https://gqcg.github.io/GQCP/tutorial/introduction.html">Tutorial</a></li>
+<li>Molpro: <a href="https://www.molpro.net/manual/doku.php">User's Manual</a></li>
+<li>PyProcar: <a href="https://github.com/romerogroup/pyprocar">This package is suitable for SSP calculation</a></li>
+</ul>
+<h2>Wheels</h2>
+<ul>
+<li>CatKit: <a href="https://github.com/SUNCAT-Center/CatKit">Catalysis Kit</a></li>
+<li>CatGen: <a href="https://catkit-jboes.readthedocs.io/en/latest/_static/frontmatter/catgen.html">Catalysis Generator</a></li>
+</ul>
+<h2>Textbooks</h2>
+<ul>
+<li>量子コンピュータによる量子化学計算入門 (KS化学専門書) <a href="https://www.amazon.co.jp/量子コンピュータによる量子化学計算入門-KS化学専門書-杉﨑-研司/dp/4065218276">[link]</a></li>
+</ul>
+<h2>Links</h2>
+<p><a href="https://joshuagoings.com/2013/11/26/644/">Thouless Theorem</a>.  Is has also been mentioned in this <a href="https://quantumai.google/openfermion/tutorials/circuits_1_basis_change">OpenFermion tutorial</a>.<br />
+<a href="https://joshuagoings.com/2020/08/20/VQE/">VQE Example</a><br />
+<a href="https://lcbc-epfl.github.io/iesm-public/intro.html">This tutorial is useful</a>  </p>
+<p><a href="https://nucleartalent.github.io/ManyBody2018/doc/pub/fci/html/fci-bs.html">Full configuration interaction theory</a></p>
+<h1>VQE Embedding</h1>
+<h2>Tools</h2>
+<ul>
+<li><a href="https://github.com/danclaudino/PsiEmbed">PsiEmbed</a></li>
+<li><a href="https://github.com/mrossinek/projection-embedding-vqe">projection-embedding-vqe</a></li>
+<li><a href="https://github.com/qiskit-community/qiskit-nature">Qiskit-nature</a></li>
+<li>Qiskit-nature: <a href="https://qiskit.org/ecosystem/nature/getting_started.html">Getting Started</a></li>
+</ul>
+<h1>DMET</h1>
+<p>The density matrix embedding theory (DMET) was proposed by Garnet Chan in 2012. DMET is one of the class of <strong><em>quantum embedding theory</em></strong>.</p>
+<p>Selective references are:</p>
+<ul>
+<li><a href="http://dx.doi.org/10.1103/PhysRevLett.109.186404">Knizia_2012</a></li>
+<li><a href="https://doi.org/10.1021/ct301044e">Knizia_2013</a></li>
+<li><a href="https://doi.org/10.1021/acs.jctc.6b00316">Wouters_2016</a></li>
+</ul>
+<p>Up to date, there are some studies on implementation of DMET on quantum computers (basically VQE), but only a few:</p>
+<ul>
+<li><a href="https://doi.org/10.48550/arXiv.1610.06910">A Hybrid C/Q Approach for Large-Scale Studies of Quantum Systems with DMET</a>: Rubin in 2016; UCC-VQE</li>
+<li><a href="https://doi.org/10.1103/PhysRevB.105.125117">Solving the Hubbard model using DMET and the VQE</a>: Mineh &amp; Montanaro in 2022; <strong>swap networks</strong></li>
+<li><a href="https://doi.org/10.48550/arXiv.1806.01305">A Problem Decomposition Approach</a>: Yamazaki in 2018; estimate resources for DMET</li>
+<li><a href="https://doi.org/10.1038/s42005-021-00751-9">Optimizing electronic structure simulations on a trapped-ion quantum computer using problem decomposition</a>: Kawashima in 2021</li>
+<li><a href="https://doi.org/10.1103/PhysRevResearch.3.033230">Reduced density matrix sampling</a>: Tilly in 2021; sampling reduced DMET; energy-weighted</li>
+</ul>
+<p>The question is, how is the performance of DMET on quantum computer (quantum advantage)? Why not so many people try implementing DMET on QC?</p>
+<h1>A brief review on QIP 2024</h1>
+<h2>Quantum Chemistry</h2>
+<p>Basically about clasicall quantum chemistry methods and VQE. </p>
+<h3>Problems with VQE</h3>
+<ul>
+<li>measurement overhead: </li>
+<li>optimization problem:</li>
+<li></li>
+</ul>
+<h2>Tensor Network</h2>
+<h2>Quantum information and quantum algorithm</h2>
