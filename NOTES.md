@@ -30,8 +30,8 @@ What has been done on this site and what's planned. Newest first.
 ## To do
 
 ### Publishing (next)
-- [ ] Push: `git push origin main legacy-master legacy-main`
-- [ ] GitHub → Settings → Pages → Source: **GitHub Actions** (it still serves the old `master` branch)
+- [x] Pushed `main` + tags `legacy-master`, `legacy-main` (2026-10-07). First workflow run: build OK; deploy failed because Pages still serves the `master` branch (expected until the next step)
+- [ ] GitHub → Settings → Pages → Source: **GitHub Actions**, then Actions tab → the failed run → **Re-run failed jobs**
 - [ ] Check the live site, then delete the remote `master` branch (`git push origin --delete master`); it's kept in the tag
 
 ### Content
