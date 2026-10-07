@@ -8,6 +8,6 @@ molecular Hamiltonians efficiently on real hardware.
 
 This is my personal page: [research](/research/), small [tools](/tools/) such as a
 [McMillan–Allen–Dynes Tc calculator](/tools/mcmillan/),
-a [blog](/posts/) and some [links](/links/).
+and a [blog](/posts/).
 
 Find me on [GitHub](https://github.com/TCWang-96).

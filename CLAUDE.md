@@ -23,3 +23,4 @@ Personal page + future blog of TC Wang. Built with **Hugo** now; the user may mo
 
 ## History
 Pre-2026 site in tags `legacy-master` and `legacy-main`. Quantum notes moved to `~/working/quantum-chemistry`.
+Personal links moved to `~/working/zatsu`; food inventory tracker dropped.

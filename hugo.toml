@@ -6,7 +6,7 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   author = "TC Wang"
-  description = "Personal page of TC Wang: quantum chemistry, quantum computing, tools and notes."
+  description = "Personal page of TC Wang: quantum chemistry, quantum computing, tools and blog."
   github = "https://github.com/TCWang-96"
 
 [menus]
@@ -22,10 +22,6 @@ disableKinds = ["taxonomy", "term"]
     name = "Blog"
     pageRef = "/posts"
     weight = 30
-  [[menus.main]]
-    name = "Links"
-    pageRef = "/links"
-    weight = 40
 
 [markup.goldmark.extensions.passthrough]
   # Lets $...$ and $$...$$ reach KaTeX untouched (pages opt in with `math: true`)

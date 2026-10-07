@@ -28,15 +28,15 @@ Publish: commit and `git push` to `main`. The workflow in `.github/workflows/hug
 | `content/research/` | Research section |
 | `content/tools/` | Calculators (`mcmillan.md` = McMillan–Allen–Dynes Tc) |
 | `content/posts/` | Blog posts (Markdown; add `math: true` for LaTeX via KaTeX) |
-| `content/links.md` | Personal links |
 | `layouts/` | HTML templates (no external theme) |
 | `layouts/shortcodes/mcmillan.html` | Tc calculator markup |
 | `static/js/mcmillan.js` | Tc calculator logic (plain JS, reusable in Astro) |
 | `assets/css/main.css` | Styles (light/dark) |
-| `static/apps/` | Stand-alone pages copied as-is (food inventory tracker) |
+| `static/` | Files copied as-is (`js/` for interactive pages) |
 
 ## History
 
 The pre-2026 site lives in the tags `legacy-master` (old live site: notes, tools, links)
 and `legacy-main` (old MAD/NMR calculators). The quantum computing / chemistry notes moved
-to a separate research repo (`~/working/quantum-chemistry`).
+to a separate research repo (`~/working/quantum-chemistry`), and the personal links to
+`~/working/zatsu` (as `links.json`). The food inventory tracker was dropped (still in `legacy-master`).
