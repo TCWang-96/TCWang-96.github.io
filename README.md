@@ -5,6 +5,8 @@ Personal website of TC Wang, built with [Hugo](https://gohugo.io) and published 
 
 The output is plain static HTML, so the same site can move to another host
 (Netlify, Cloudflare Pages, any web server) by uploading the `public/` folder.
+A later move to [Astro](https://astro.build) is planned for as a possibility: content stays
+portable Markdown; see the rules in `CLAUDE.md`.
 
 ## Everyday use
 
@@ -28,7 +30,8 @@ Publish: commit and `git push` to `main`. The workflow in `.github/workflows/hug
 | `content/posts/` | Blog posts (Markdown; add `math: true` for LaTeX via KaTeX) |
 | `content/links.md` | Personal links |
 | `layouts/` | HTML templates (no external theme) |
-| `layouts/shortcodes/mcmillan.html` | The Tc calculator itself |
+| `layouts/shortcodes/mcmillan.html` | Tc calculator markup |
+| `static/js/mcmillan.js` | Tc calculator logic (plain JS, reusable in Astro) |
 | `assets/css/main.css` | Styles (light/dark) |
 | `static/apps/` | Stand-alone pages copied as-is (food inventory tracker) |
 
