@@ -31,8 +31,8 @@ What has been done on this site and what's planned. Newest first.
 
 ### Publishing (next)
 - [x] Pushed `main` + tags `legacy-master`, `legacy-main` (2026-10-07). First workflow run: build OK; deploy failed because Pages still serves the `master` branch (expected until the next step)
-- [ ] GitHub → Settings → Pages → Source: **GitHub Actions**, then Actions tab → the failed run → **Re-run failed jobs**
-- [ ] Check the live site, then delete the remote `master` branch (`git push origin --delete master`); it's kept in the tag
+- [x] Pages source switched to **GitHub Actions**. The `github-pages` environment only allowed deploys from `master` (a leftover rule), so it now allows `main` only. Run 3 deployed; site live 2026-10-07
+- [x] Live site checked (all pages 200), then deleted the `master` branch locally and on GitHub. Its history is in tag `legacy-master`
 
 ### Content
 - [ ] Rewrite the home page intro in your own words (name, affiliation, interests)
