@@ -16,6 +16,9 @@ Personal page + future blog of TC Wang. Built with **Hugo** now; the user may mo
   or in `static/images/`.
 - Output must stay plain static HTML (no server code), so any host works.
 
+## Project notes
+Keep `NOTES.md` up to date: what was done (with dates) and the to-do list.
+
 ## Commands
 - Preview: `hugo server` (http://localhost:1313); build: `hugo --gc --minify` → `public/`
 - New post: `hugo new content posts/<slug>.md`
