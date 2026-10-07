@@ -33,7 +33,7 @@ What has been done on this site and what's planned. Newest first.
 - [x] Pushed `main` + tags `legacy-master`, `legacy-main` (2026-10-07). First workflow run: build OK; deploy failed because Pages still serves the `master` branch (expected until the next step)
 - [x] Pages source switched to **GitHub Actions**. The `github-pages` environment only allowed deploys from `master` (a leftover rule), so it now allows `main` only. Run 3 deployed; site live 2026-10-07
 - [x] Live site checked (all pages 200). Deleted the local `master` branch (its history is in tag `legacy-master`)
-- [ ] GitHub refused to delete the remote `master` because it's still the **default branch**: Settings → General → Default branch → switch to `main`, then `git push origin --delete master`
+- [x] Default branch switched to `main`, then deleted the remote `master` (2026-10-07). The repo now has only `main` + tags `legacy-master`, `legacy-main`
 
 ### Content
 - [ ] Rewrite the home page intro in your own words (name, affiliation, interests)
