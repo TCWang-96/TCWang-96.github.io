@@ -1,0 +1,84 @@
+:root {
+  --bg: #fdfdfc;
+  --fg: #1d1f21;
+  --muted: #6b7075;
+  --accent: #2f5fb3;
+  --line: #e4e4e2;
+  --card: #f4f4f2;
+  --error: #b3261e;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181b;
+    --fg: #e6e6e3;
+    --muted: #9a9fa5;
+    --accent: #8db1f0;
+    --line: #2c2f33;
+    --card: #1f2226;
+    --error: #f2b8b5;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0 auto;
+  max-width: 44rem;
+  padding: 0 1rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.65 system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "PingFang SC", sans-serif;
+}
+a { color: var(--accent); text-underline-offset: 0.15em; }
+h1, h2, h3 { line-height: 1.25; }
+h1 { font-size: 1.9rem; margin: 2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin-top: 2.2rem; }
+h3 { font-size: 1.05rem; margin-top: 1.6rem; }
+code { font-size: 0.9em; background: var(--card); padding: 0.1em 0.3em; border-radius: 4px; }
+.muted, .meta { color: var(--muted); }
+
+.site-header {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: baseline;
+  justify-content: space-between;
+  padding: 1.5rem 0 1rem; border-bottom: 1px solid var(--line);
+}
+.site-title { font-weight: 650; font-size: 1.15rem; color: var(--fg); text-decoration: none; }
+.site-header nav { display: flex; flex-wrap: wrap; gap: 1.1rem; }
+.site-header nav a { color: var(--muted); text-decoration: none; }
+.site-header nav a:hover, .site-header nav a[aria-current] { color: var(--fg); }
+
+main { padding-bottom: 3rem; }
+.site-footer {
+  display: flex; gap: 1.2rem; flex-wrap: wrap;
+  padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 0.9rem;
+}
+.site-footer a { color: var(--muted); }
+
+.page-list { list-style: none; padding: 0; }
+.page-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+.page-list time { color: var(--muted); font-size: 0.9rem; margin-left: 0.5rem; font-variant-numeric: tabular-nums; }
+.page-list p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.95rem; }
+
+/* calculator */
+.calc {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1.2rem; margin: 1.5rem 0;
+}
+.calc .row { display: grid; grid-template-columns: 1fr; gap: 0.25rem; margin-bottom: 0.9rem; }
+.calc label { font-weight: 600; font-size: 0.95rem; }
+.calc .hint { color: var(--muted); font-size: 0.85rem; }
+.calc .with-unit { display: flex; gap: 0.5rem; }
+.calc input, .calc select {
+  font: inherit; color: var(--fg); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 0.45rem 0.6rem;
+  min-width: 0;
+}
+.calc input { flex: 1; }
+.calc output { display: block; margin-top: 0.4rem; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.calc output.error { color: var(--error); font-size: 1rem; }
+
+/* keep wide equations from widening the page on phones */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
+article, .intro { overflow-wrap: anywhere; }

@@ -1,0 +1,63 @@
+<form class="calc" id="mad-calc" novalidate>
+  <div class="row">
+    <label for="mad-lambda">Electron–phonon coupling λ</label>
+    <input id="mad-lambda" type="number" step="any" min="0" value="1.0" inputmode="decimal" required>
+  </div>
+  <div class="row">
+    <label for="mad-mu">Coulomb pseudopotential μ*</label>
+    <input id="mad-mu" type="number" step="any" min="0" value="0.10" inputmode="decimal" required>
+    <span class="hint">Typically 0.10–0.15.</span>
+  </div>
+  <div class="row">
+    <label for="mad-omega">Logarithmic average phonon frequency ω<sub>log</sub></label>
+    <div class="with-unit">
+      <input id="mad-omega" type="number" step="any" min="0" value="300" inputmode="decimal" required>
+      <select id="mad-unit" aria-label="Unit of ω_log">
+        <option value="1">K</option>
+        <option value="11.604518">meV</option>
+        <option value="1.4387769">cm⁻¹</option>
+        <option value="47.992431">THz</option>
+      </select>
+    </div>
+  </div>
+  <output id="mad-result" for="mad-lambda mad-mu mad-omega mad-unit" aria-live="polite"></output>
+</form>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const fields = ["mad-lambda", "mad-mu", "mad-omega", "mad-unit"].map($);
+  const out = $("mad-result");
+
+  // Allen–Dynes form of the McMillan formula; omegaLogK in kelvin, returns Tc in kelvin.
+  function tcAllenDynes(lambda, mu, omegaLogK) {
+    const denom = lambda - mu * (1 + 0.62 * lambda);
+    if (denom <= 0) return null;  // no superconductivity predicted
+    return (omegaLogK / 1.2) * Math.exp(-1.04 * (1 + lambda) / denom);
+  }
+
+  function update() {
+    const lambda = parseFloat($("mad-lambda").value);
+    const mu = parseFloat($("mad-mu").value);
+    const omega = parseFloat($("mad-omega").value) * parseFloat($("mad-unit").value);
+    out.classList.remove("error");
+    if (![lambda, mu, omega].every(Number.isFinite) || lambda <= 0 || mu < 0 || omega <= 0) {
+      out.classList.add("error");
+      out.textContent = "Enter λ > 0, μ* ≥ 0 and ω_log > 0.";
+      return;
+    }
+    const tc = tcAllenDynes(lambda, mu, omega);
+    if (tc === null) {
+      out.classList.add("error");
+      out.textContent = "λ ≤ μ*(1 + 0.62λ): the formula predicts no superconductivity.";
+      return;
+    }
+    const tcText = tc < 0.01 ? tc.toExponential(2) : tc.toFixed(2);
+    out.innerHTML = `T<sub>c</sub> ≈ <strong>${tcText} K</strong> <span class="hint">(ω<sub>log</sub> = ${omega.toFixed(1)} K)</span>`;
+  }
+
+  fields.forEach((el) => el.addEventListener("input", update));
+  $("mad-calc").addEventListener("submit", (e) => e.preventDefault());
+  update();
+})();
+</script>

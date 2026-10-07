@@ -1,0 +1,39 @@
+baseURL = "https://tcwang-96.github.io/"
+locale = "en"
+title = "TC Wang"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  author = "TC Wang"
+  description = "Personal page of TC Wang: quantum chemistry, quantum computing, tools and notes."
+  github = "https://github.com/TCWang-96"
+
+[menus]
+  [[menus.main]]
+    name = "Research"
+    pageRef = "/research"
+    weight = 10
+  [[menus.main]]
+    name = "Tools"
+    pageRef = "/tools"
+    weight = 20
+  [[menus.main]]
+    name = "Blog"
+    pageRef = "/posts"
+    weight = 30
+  [[menus.main]]
+    name = "Links"
+    pageRef = "/links"
+    weight = 40
+
+[markup.goldmark.extensions.passthrough]
+  # Lets $...$ and $$...$$ reach KaTeX untouched (pages opt in with `math: true`)
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    inline = [['$', '$'], ['\(', '\)']]
+    block = [['$$', '$$'], ['\[', '\]']]
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]
